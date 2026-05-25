@@ -14,14 +14,14 @@
 
 | Concept | Description |
 |---|---|
-| **Context** | Core context capability for Agent-Skills-for-Context-Engineering-main workflows |
-| **Engineering** | Core engineering capability for Agent-Skills-for-Context-Engineering-main workflows |
-| **Agent** | Core agent capability for Agent-Skills-for-Context-Engineering-main workflows |
-| **Skill** | Core skill capability for Agent-Skills-for-Context-Engineering-main workflows |
-| **Window** | Core window capability for Agent-Skills-for-Context-Engineering-main workflows |
-| **Management** | Core management capability for Agent-Skills-for-Context-Engineering-main workflows |
-| **Claude** | Core claude capability for Agent-Skills-for-Context-Engineering-main workflows |
-| **Optimization** | Core optimization capability for Agent-Skills-for-Context-Engineering-main workflows |
+| **Context Window** | Fixed token budget for each Claude call |
+| **Context Engineering** | Strategic placement of info in window |
+| **Compression** | Shrink context without losing key facts |
+| **Prioritization** | Rank context chunks by relevance |
+| **Sliding Window** | Roll old context out as new comes in |
+| **Retrieval** | Fetch relevant context chunks on demand |
+| **Chunking** | Split large docs into retrievable pieces |
+| **Summarization** | Compress old turns into compact summary |
 
 ---
 
@@ -46,19 +46,19 @@ claude 'what can Agent-Skills-for-Context-Engineering-main do?'
 ## ☠️ STARTUPS / BUSINESSES
 
 - **Agencies**: automate context workflows for clients at scale
-- **Founders**: ship engineering features 10x faster with Claude
-- **Freelancers**: deliver agent work with AI-assisted precision
+- **Founders**: ship engineering features 10x faster
+- **Freelancers**: deliver agent work with AI precision
 
 ---
 
 ## Features
 
-- Context automation and orchestration
-- Engineering automation and orchestration
-- Agent automation and orchestration
-- Skill automation and orchestration
-- Window automation and orchestration
-- Management automation and orchestration
+- Context automation
+- Engineering automation
+- Agent automation
+- Skill automation
+- Window automation
+- Management automation
 
 ---
 
@@ -74,9 +74,14 @@ cd Agent-Skills-for-Context-Engineering-main
 ## Usage
 
 ```bash
-# In Claude Code
-/Agent-Skills-for-Context-Engineering-main
-claude 'context task here'
+# Activate skill in Claude Code
+claude --skill Agent-Skills-for-Context-Engineering-main "your task here"
+
+# Quick workflow
+claude "context automation task"
+
+# Get help
+claude "what can Agent-Skills-for-Context-Engineering-main do?"
 ```
 
 ---
@@ -85,11 +90,11 @@ claude 'context task here'
 
 | Variable | Description | Default |
 |---|---|---|
-| `API_KEY` | Primary API key for service access | Required |
+| `API_KEY` | Primary API key | Required |
 | `MODEL` | AI model to use | claude-3-5-sonnet |
-| `DEBUG` | Enable verbose debug output | false |
-| `MAX_TOKENS` | Max token budget per request | 8192 |
-| `TIMEOUT` | Request timeout in seconds | 30 |
+| `DEBUG` | Enable verbose debug | false |
+| `MAX_TOKENS` | Max token budget | 8192 |
+| `TIMEOUT` | Request timeout (sec) | 30 |
 | `LOG_LEVEL` | Logging verbosity | info |
 
 ---
@@ -98,40 +103,36 @@ claude 'context task here'
 
 ```
 Agent-Skills-for-Context-Engineering-main/
-├── README.md           # This file
+├── README.md           # Documentation
 ├── SKILL.md            # Claude Code skill definition
-├── scripts/            # Automation and utility scripts
-├── templates/          # Output and prompt templates
-├── examples/           # Usage examples and demos
-├── tests/              # Unit and integration tests
+├── scripts/            # Automation scripts
+├── templates/          # Output templates
+├── examples/           # Usage examples
 └── docs/               # Extended documentation
-    ├── setup.md        # Setup guide
-    ├── api.md          # API reference
-    └── faq.md          # Frequently asked questions
 ```
 
 ---
 
 ## Examples
 
-### Basic Usage
+### Basic
 
 ```bash
-# Activate in Claude Code
-claude --skill Agent-Skills-for-Context-Engineering-main "your task here"
+# Simple task
+claude --skill Agent-Skills-for-Context-Engineering-main "context task"
 
-# With options
-claude --skill Agent-Skills-for-Context-Engineering-main --verbose "detailed task"
+# Verbose
+claude --skill Agent-Skills-for-Context-Engineering-main --verbose "detailed engineering task"
 ```
 
-### Advanced Workflow
+### Advanced Pipeline
 
 ```bash
-# Chain with other skills
+# Chain skills
 claude --skill Agent-Skills-for-Context-Engineering-main "step 1" | claude --skill summarize
 
-# Batch processing
-for item in list; do
+# Batch run
+for item in $(cat list.txt); do
   claude --skill Agent-Skills-for-Context-Engineering-main "process $item"
 done
 ```
@@ -142,18 +143,18 @@ done
 
 | Issue | Cause | Fix |
 |---|---|---|
-| Auth fails | Invalid/expired API key | Re-export key in shell profile |
-| Timeout error | Network latency or large payload | Increase TIMEOUT value |
-| Empty output | Prompt too vague | Add more context to request |
-| Rate limit hit | Too many requests | Add delay between calls |
-| Model error | Unsupported model version | Update MODEL variable |
+| Auth fails | Invalid API key | Re-export key in shell profile |
+| Timeout | Network or large payload | Increase TIMEOUT value |
+| Empty output | Prompt too vague | Add more context |
+| Rate limit | Too many requests | Add delay between calls |
+| Model error | Unsupported version | Update MODEL variable |
 | Import error | Missing dependency | Run pip install -r requirements.txt |
 
 ---
 
 ## Comparison
 
-| Feature | This Skill | Alternative A | Alternative B |
+| Feature | This Skill | Alt A | Alt B |
 |---|---|---|---|
 | Claude Code native | ✅ | ❌ | ✅ |
 | Auto-activation | ✅ | ✅ | ❌ |
@@ -163,23 +164,21 @@ done
 
 ---
 
-## Contributing
-
-1. Fork this repo
-2. Create feature branch: `git checkout -b feat/your-feature`
-3. Commit changes: `git commit -m 'feat: add feature'`
-4. Push: `git push origin feat/your-feature`
-5. Open PR
-
----
-
 ## Changelog
 
 | Version | Changes |
 |---|---|
-| v2.0 | Major refactor, Claude 4 support |
-| v1.5 | Added auto-activation keywords |
+| v2.0 | Claude 4 support, auto-activation |
+| v1.5 | Added keyword triggers |
 | v1.0 | Initial release |
+
+---
+
+## Contributing
+
+1. Fork → feature branch → commit → PR
+2. Follow conventional commits: `feat:`, `fix:`, `docs:`
+3. Add tests for new features
 
 ---
 
@@ -191,7 +190,7 @@ done
 
 ## 📜 License
 
-MIT — free to use, modify, and distribute.
+MIT — free to use, modify, distribute.
 
 ---
 
